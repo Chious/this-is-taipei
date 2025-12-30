@@ -141,3 +141,27 @@ body {
 *::after {
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/Manrope/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif TC";
+  src: url("/fonts/Noto_Serif_TC/NotoSerifTC-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  font-family: "Manrope", "Noto Serif TC", serif;
+  font-optical-sizing: auto;
+}

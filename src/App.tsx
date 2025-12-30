@@ -1,16 +1,13 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-
-/*
- * TODO: Implement with view transition api
- */
+import { BrowserRouter } from "react-router-dom";
+import ThemeProvider from "./providers/themeProvider";
+import AppRoutes from "./pages/AppRoutes";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <ThemeProvider>
+        <AppRoutes />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

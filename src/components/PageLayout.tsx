@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,24 +25,37 @@ export default function PageLayout({ config }: PageLayoutProps) {
   const textRef = useRef(null);
 
   useEffect(() => {
-    const lenis = new Lenis();
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    if (isSafari) {
+      ScrollTrigger.refresh();
+      return;
+    }
+
+    const lenis = new Lenis({
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      infinite: false,
+    });
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    const ticker = (time: number) => {
+    function update(time: number) {
       lenis.raf(time * 1000);
-    };
+    }
 
-    gsap.ticker.add(ticker);
+    gsap.ticker.add(update);
 
     return () => {
-      gsap.ticker.remove(ticker);
+      gsap.ticker.remove(update);
       lenis.destroy();
     };
   }, []);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
+      if (!spacerRef.current || !textRef.current) return;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: spacerRef.current,
@@ -77,12 +91,9 @@ export default function PageLayout({ config }: PageLayoutProps) {
         },
         0
       );
-    }, mainRef);
-
-    return () => {
-      ctx.revert();
-    };
-  }, []);
+    },
+    { scope: mainRef, dependencies: [] }
+  );
 
   const videoSource = config.videoSrc || taipeiVideo;
 

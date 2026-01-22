@@ -27,7 +27,11 @@
 .image-container img {
   width: 100%;
   height: auto;
+  border: 1px solid transparent;
   border-radius: 8px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  padding: 2rem;
 }
 
 .text-container {

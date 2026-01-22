@@ -2,8 +2,9 @@ import { useRef } from "react";
 import { SwitchTransition, Transition } from "react-transition-group";
 import { Routes, Route, useLocation } from "react-router-dom";
 import gsap from "gsap";
-import PageLayout from "../components/PageLayout";
+import PageLayout from "./PageLayout";
 import { pageConfigs } from "./pageConfigs";
+import Loading from "./Loading";
 
 interface RouteTransitionProps {
   children: React.ReactNode;
@@ -69,6 +70,7 @@ function AppRoutes() {
         backgroundColor: "#000",
       }}
     >
+      <Loading />
       <RouteTransition locationKey={location.pathname}>
         <Routes location={location}>
           <Route path="/" element={<PageLayout config={pageConfigs["/"]} />} />

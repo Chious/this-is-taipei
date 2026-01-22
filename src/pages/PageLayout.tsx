@@ -4,9 +4,9 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTheme } from "../hooks/useTheme";
-import Navbar from "./Navbar";
-import IntroSection from "./IntroSection";
-import Helmet from "./Helmet";
+import Navbar from "../components/Navbar";
+import IntroSection from "../components/IntroSection";
+import Helmet from "../components/Helmet";
 import type { PageConfig } from "../types/page";
 import taipeiVideo from "../assets/182237-868066892_tiny.mp4";
 import "../pages/Home.css";
@@ -119,6 +119,7 @@ export default function PageLayout({ config }: PageLayoutProps) {
               muted
               loop
               playsInline
+              preload="auto"
             ></video>
           </div>
           <span className="scroll-to-navigate">

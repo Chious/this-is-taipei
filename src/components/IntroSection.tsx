@@ -1,6 +1,7 @@
 import type { IntroSectionContent } from "../types/page";
 import "../pages/Home.css";
 import "./IntroSection.css";
+import { TextFade } from "./TextFade";
 
 interface IntroSectionProps {
   content: IntroSectionContent;
@@ -9,10 +10,13 @@ interface IntroSectionProps {
 export default function IntroSection({ content }: IntroSectionProps) {
   return (
     <section className="intro-section">
-      <h2 className="section-title">{content.title}</h2>
+      <h2 className="section-title">
+        <TextFade direction="up">{content.title}</TextFade>
+      </h2>
 
       {content.contentBlocks.map((block, index) => (
-        <div
+        <TextFade
+          direction="up"
           key={index}
           className={`content-block ${block.reverse ? "reverse" : ""}`}
         >
@@ -25,7 +29,7 @@ export default function IntroSection({ content }: IntroSectionProps) {
               <p key={pIndex}>{paragraph}</p>
             ))}
           </div>
-        </div>
+        </TextFade>
       ))}
     </section>
   );
